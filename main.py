@@ -167,7 +167,95 @@ class PhilipsEspressoMachine(KnowledgeEngine):
         #drukowany jest wniosek,
         #wynikający z podanych 
         #przez użytkownika faktów
-        print(f'Wniosek: {element} jest {state}')
+        print(f'{element} jest {state}')
+
+    @Rule(
+        AND(
+            Fact(action='start'),
+            Fact(element='urządzenie'),
+            Fact(state='przegrzane')
+        )
+    )  
+    def coolDevice(self):
+        
+        #drukowane jest sugerowane działanie
+        print(f'Powinieneś schłodzić urządzenie!')
+
+    @Rule(
+        AND(
+            Fact(action='start'),
+            OR(
+                Fact(element='lejek kawy'),
+                Fact(element='filtr AquaClean')
+            ),
+            Fact(element=MATCH.element),
+            Fact(state='zapchany')
+        )
+    )  
+    def unclogCoffeFunnelOrAquaClean(self, element):
+        
+        #drukowane jest sugerowane działanie
+        print(f'Powinieneś odetkać {element}!')
+
+    @Rule(
+        AND(
+            Fact(action='start'),
+            Fact(element='jednostka zaparzająca'),
+            Fact(state='brudna')
+        )
+    )  
+    def cleanBrewingUnit(self):
+        
+        #drukowane jest sugerowane działanie
+        print(f'Powinieneś wyczyścić jednostkę zaparzającą!')
+
+    @Rule(
+        AND(
+            Fact(action='start'),
+            Fact(element='jednostka zaparzająca'),
+            Fact(state='nieodpowiednio nasmarowana')
+        )
+    )  
+    def lubricateBrewingUnit(self):
+        
+        #drukowane jest sugerowane działanie
+        print(f'Powinieneś odpowiednio nasmarować jednostkę zaparzającą!')
+
+    @Rule(
+        AND(
+            Fact(action='start'),
+            Fact(element='jednostka zaparzająca'),
+            Fact(state='ustawiona nieprawidłowo')
+        )
+    )  
+    def positionBrewingUnit(self):
+        
+        #drukowane jest sugerowane działanie
+        print(f'Powinieneś odpowiednio ustawić jednostkę zaparzającą!')
+
+    @Rule(
+        AND(
+            Fact(action='start'),
+            Fact(element='obieg wody'),
+            Fact(state='powietrze wewnątrz')
+        )
+    )  
+    def bleedWaterCirculation(self):
+        
+        #drukowane jest sugerowane działanie
+        print(f'Powinieneś odpowietrzyć obieg wody!')
+
+    @Rule(
+        AND(
+            Fact(action='start'),
+            Fact(element='filtr AquaClean'),
+            Fact(state='nieprawidłowo przygotowany przed instalacją')
+        )
+    )  
+    def prepareAquaCleanCorrectly(self):
+        
+        #drukowane jest sugerowane działanie
+        print(f'Powinieneś prawidłowo przygotować filtr AquaClean przed instalacją!')
 
     #funkcja zwracająca napis, 
     #w zależności od wybranej przez użytkownika opcji
